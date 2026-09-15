@@ -1,8 +1,10 @@
-# OpenCode agent stats
+# OpenCode TPS — LLM Performance Stats for Agents and Subagents
 
-An OpenCode TUI plugin that keeps LLM performance visible in both the main session and subagent sessions.
+OpenCode TPS is an agent-aware TUI plugin for monitoring live LLM performance in OpenCode. It displays tokens per second (TPS), average generation speed, time to first token (TTFT), output-token usage, and combined statistics for main sessions and subagents.
 
-## Features
+Track model speed while an agent is streaming, compare activity across an entire agent tree, and inspect per-session metrics without leaving the OpenCode terminal interface.
+
+## OpenCode LLM performance monitoring
 
 - Footer in every session: live estimated TPS, measured average generation rate, TTFT, and output tokens.
 - `TREE` line aggregating the selected session and all descendant agents.
@@ -12,6 +14,15 @@ An OpenCode TUI plugin that keeps LLM performance visible in both the main sessi
 - Safe handling of duplicate events, retries, errors, stale streams, and parallel agents.
 
 `TPS` is prefixed with `~` while streaming because OpenCode exposes text deltas, not exact live token counts. Completed `AVG` uses provider-reported output plus reasoning tokens over persisted text/reasoning spans.
+
+### Metrics
+
+- **TPS:** Estimated live output tokens generated per second.
+- **AVG:** Measured average generation speed for completed responses.
+- **TTFT:** Mean time to first token, showing how quickly the LLM begins responding.
+- **OUT:** Output and reasoning-token usage for the current session or agent tree.
+
+OpenCode TPS works with multi-agent workflows, parallel subagents, and sequential agent handoffs. The persistent footer makes model-server performance visible when you switch between a parent session and its child agents.
 
 ## Screenshots
 
@@ -27,7 +38,7 @@ Use `/llmstats` to inspect agents and select a session to open.
 
 ![LLM stats dialog listing the main session and developer subagent with models and token counts](assets/agent-details.png)
 
-## Install from this Git repository
+## Install the OpenCode TPS plugin
 
 The OpenCode plugin installer accepts npm modules. For this Git repository, clone it and reference the TUI entrypoint in `~/.config/opencode/tui.json`:
 
@@ -46,6 +57,10 @@ git clone git@github.com:cguldogan/opencode-tps.git ~/.config/opencode/tui-plugi
 ```
 
 Then set the file URL to `~/.config/opencode/tui-plugins/opencode-tps/tui.tsx` and restart OpenCode. Type `/llmstats` in a session to open the detailed view.
+
+## Why use OpenCode TPS?
+
+Use the plugin to diagnose slow LLM responses, observe first-token latency, compare generation speeds, monitor concurrent agents, and understand token usage during OpenCode coding sessions. All statistics are calculated locally from OpenCode session events and history; the plugin does not send analytics or session data to third parties.
 
 ## Development
 
