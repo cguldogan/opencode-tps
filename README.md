@@ -40,23 +40,38 @@ Use `/llmstats` to inspect agents and select a session to open.
 
 ## Install the OpenCode TPS plugin
 
-The OpenCode plugin installer accepts npm modules. For this Git repository, clone it and reference the TUI entrypoint in `~/.config/opencode/tui.json`:
+OpenCode TPS uses the [OpenCode plugin system](https://opencode.ai/docs/plugins/) and exposes the required `./tui` package entry point.
 
-```json
-{
-  "plugin": [
-    "file:///absolute/path/to/opencode-tps/tui.tsx"
-  ]
-}
+### Install with OpenCode
+
+Install the plugin globally from GitHub:
+
+```bash
+opencode plugin --global github:cguldogan/opencode-tps
 ```
 
-For example:
+OpenCode detects the TUI target, installs the package, and adds `github:cguldogan/opencode-tps` to `~/.config/opencode/tui.json`. Restart OpenCode after installation, then type `/llmstats` to open the detailed agent view.
+
+### Configure manually
+
+Clone the repository:
 
 ```bash
 git clone git@github.com:cguldogan/opencode-tps.git ~/.config/opencode/tui-plugins/opencode-tps
 ```
 
-Then set the file URL to `~/.config/opencode/tui-plugins/opencode-tps/tui.tsx` and restart OpenCode. Type `/llmstats` in a session to open the detailed view.
+Add its TUI entry point to `~/.config/opencode/tui.json`:
+
+```json
+{
+  "$schema": "https://opencode.ai/tui.json",
+  "plugin": [
+    "file:///home/you/.config/opencode/tui-plugins/opencode-tps/tui.tsx"
+  ]
+}
+```
+
+Replace `/home/you` with your home-directory path and restart OpenCode.
 
 ## Why use OpenCode TPS?
 
