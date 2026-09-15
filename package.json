@@ -11,6 +11,7 @@
   "files": [
     "README.md",
     "LICENSE",
+    "assets/",
     "tui.tsx",
     "tracker.ts",
     "tsconfig.json"

@@ -13,6 +13,20 @@ An OpenCode TUI plugin that keeps LLM performance visible in both the main sessi
 
 `TPS` is prefixed with `~` while streaming because OpenCode exposes text deltas, not exact live token counts. Completed `AVG` uses provider-reported output plus reasoning tokens over persisted text/reasoning spans.
 
+## Screenshots
+
+### Session footer
+
+Stats for the current session and live activity across its agent tree.
+
+![Session footer with main-agent TPS, average generation rate, TTFT, and combined tree activity](assets/session-footer.png)
+
+### Agent details
+
+Use `/llmstats` to inspect agents and select a session to open.
+
+![LLM stats dialog listing the main session and developer subagent with models and token counts](assets/agent-details.png)
+
 ## Install from this Git repository
 
 The OpenCode plugin installer accepts npm modules. For this Git repository, clone it and reference the TUI entrypoint in `~/.config/opencode/tui.json`:
